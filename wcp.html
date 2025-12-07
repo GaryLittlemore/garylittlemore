@@ -24,9 +24,9 @@
 <h1>World Cup Prediction Game</h1>
 <p>Fill in your predictions below and submit your entry.</p>
 
-<form action="https://formsubmit.co/gary.littlemore@gmail.com" method="POST">
+<form action="https://formsubmit.co/YOUR_EMAIL_HERE" method="POST">
 
-<input type="hidden" name="_next" value="https://garylittlemore.github.io/thankyou.html">
+<input type="hidden" name="_next" value="https://YOUR_GITHUB_USERNAME.github.io/thankyou.html">
 <input type="hidden" name="_subject" value="New World Cup Prediction Entry">
 <input type="hidden" name="_captcha" value="false">
 
@@ -46,7 +46,7 @@ document.addEventListener("DOMContentLoaded", function () {
         "Group H": ["Spain", "Cape Verde", "Saudi Arabia", "Uruguay"],
         "Group I": ["France", "Senegal", "FIFA Playoff 2", "Norway"],
         "Group J": ["Argentina", "Algeria", "Austria", "Jordan"],
-        "Group K": ["Portugal", "FIFA Playoff 1", "Uzbekistan", "Columbia"],
+        "Group K": ["Portugal", "FIFA Playoff 1", "Uzbekistan", "Colombia"],
         "Group L": ["England", "Croatia", "Ghana", "Panama"]
     };
 
@@ -115,6 +115,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
 <h2>Tie Breaker — Total Goals in Tournament</h2>
 <input type="number" name="Total_Goals" placeholder="Enter a number">
+
+<h2>Name and Email Address</h2>
+<input type="text" name="Contact" placeholder="Enter your name and email address">
 
 <br><br>
 <button type="submit">Submit Predictions</button>
