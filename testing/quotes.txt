@@ -1,14 +1,14 @@
-[level1]
+[white]
 Stay positive.
 Keep going.
 You can do this.
 
-[level2]
+[red]
 Success is built on consistency.
 Small progress is still progress.
 Discipline creates freedom.
 
-[level3]
+[black]
 Greatness requires sacrifice.
 Comfort is the enemy of achievement.
 Mastery demands relentless focus.
