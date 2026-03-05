@@ -1,5 +1,5 @@
 [select]
-Select your card colour
+Select your card colour.
 
 [white]
 Stay positive.
