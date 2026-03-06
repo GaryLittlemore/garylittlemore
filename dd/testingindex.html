@@ -74,8 +74,8 @@ let quotesByLevel = {};
 
 function getRandomQuote(level){
 
-    if(level === "level4" && document.getElementById("expansion").checked){
-        return "Level 4 quotes are excluded.";
+    if(level === "expansion" && document.getElementById("expansion").checked){
+        return "Expansion Pack quotes are excluded.";
     }
 
     const quotes = quotesByLevel[level];
@@ -92,8 +92,8 @@ function displayQuote(){
     let selectedLevel = document.getElementById("levelSelect").value;
     const expansion = document.getElementById("expansion").checked;
 
-    if(selectedLevel === "level4" && expansion){
-        selectedLevel = "level1";
+    if(selectedLevel === "expansion" && expansion){
+        selectedLevel = "select";
         document.getElementById("levelSelect").value = "level1";
     }
 
