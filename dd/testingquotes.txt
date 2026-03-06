@@ -1,19 +1,22 @@
-[level1]
+[select]
+Select your card colour.
+
+[white]
 Stay positive.
 Keep going.
 You can do this.
 
-[level2]
+[red]
 Success is built on consistency.
 Small progress is still progress.
 Discipline creates freedom.
 
-[level3]
+[black]
 Greatness requires sacrifice.
 Comfort is the enemy of achievement.
 Mastery demands relentless focus.
 
-[level4]
-Victory belongs to the relentless.
-Pressure reveals true character.
-The path to greatness is never comfortable.
+[expansion]
+expansion 1
+expansion 2
+expansion 3
