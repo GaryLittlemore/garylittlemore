@@ -43,7 +43,7 @@
 
 <div id="controls">
     <label for="levelSelect">Select Level: </label>
-    <select id="levelSelect"><div class="refreshButton" onclick="location.reload()">Refresh</div>
+    <select id="levelSelect">
         <option value="select">Select a card</option>
         <option value="white">White Cards</option>
         <option value="red">Red Cards</option>
@@ -51,9 +51,7 @@
         <option value="toys">Toys Expansion Cards</option>
     </select>
 </div>
-
-
-    
+   
 <div id="quote-box">
     <div id="quote">Loading quote...</div>
 </div>
@@ -111,6 +109,8 @@ document.addEventListener("DOMContentLoaded", function() {
     document.getElementById("levelSelect").addEventListener("change", displayQuote);
 });
 </script>
+
+<div class="refreshButton" onclick="location.reload()">Refresh</div>
 
 </body>
 </html>
