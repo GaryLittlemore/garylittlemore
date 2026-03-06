@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Level-Based Quotes</title>
+
+<style>
+body {
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+    font-family:Arial, sans-serif;
+    background:#f4f4f4;
+    margin:0;
+}
+
+#controls{
+    margin-bottom:20px;
+    text-align:center;
+}
+
+select, label{
+    font-size:1rem;
+    margin:5px;
+}
+
+#quote-box{
+    max-width:700px;
+    padding:30px;
+    background:white;
+    border-radius:10px;
+    box-shadow:0 4px 10px rgba(0,0,0,0.1);
+    text-align:center;
+}
+
+#quote{
+    font-size:1.8rem;
+}
+</style>
+</head>
+
+<body>
+
+<div id="controls">
+
+<label for="levelSelect">Select Level:</label>
+
+<select id="levelSelect">
+<option value="level1">Level 1</option>
+<option value="level2">Level 2</option>
+<option value="level3">Level 3</option>
+<option value="level4">Level 4</option>
+</select>
+
+<br>
+
+<label>
+<input type="checkbox" id="excludeLevel4">
+Exclude Level 4 Quotes
+</label>
+
+</div>
+
+<div id="quote-box">
+<div id="quote">Loading quote...</div>
+</div>
+
+<script>
+
+let quotesByLevel = {};
+
+function getRandomQuote(level){
+
+    if(level === "level4" && document.getElementById("excludeLevel4").checked){
+        return "Level 4 quotes are excluded.";
+    }
+
+    const quotes = quotesByLevel[level];
+
+    if(!quotes || quotes.length === 0){
+        return "No quotes found for this level.";
+    }
+
+    return quotes[Math.floor(Math.random() * quotes.length)];
+}
+
+function displayQuote(){
+
+    let selectedLevel = document.getElementById("levelSelect").value;
+    const excludeLevel4 = document.getElementById("excludeLevel4").checked;
+
+    if(selectedLevel === "level4" && excludeLevel4){
+        selectedLevel = "level1";
+        document.getElementById("levelSelect").value = "level1";
+    }
+
+    const quote = getRandomQuote(selectedLevel);
+
+    document.getElementById("quote").textContent = quote;
+}
+
+document.addEventListener("DOMContentLoaded", function(){
+
+    fetch("quotes.txt")
+    .then(response=>{
+        if(!response.ok){
+            throw new Error("Could not load quotes.txt");
+        }
+        return response.text();
+    })
+    .then(text=>{
+
+        const lines = text.split("\n");
+        let currentLevel = null;
+
+        lines.forEach(line=>{
+
+            line=line.trim();
+            const levelMatch = line.match(/^\[(.+)\]$/);
+
+            if(levelMatch){
+
+                currentLevel = levelMatch[1].toLowerCase();
+                quotesByLevel[currentLevel] = [];
+
+            }else if(line && currentLevel){
+
+                quotesByLevel[currentLevel].push(line);
+
+            }
+
+        });
+
+        displayQuote();
+
+    })
+    .catch(error=>{
+        document.getElementById("quote").textContent="Failed to load quote.";
+        console.error(error);
+    });
+
+    document.getElementById("levelSelect").addEventListener("change", displayQuote);
+    document.getElementById("excludeLevel4").addEventListener("change", displayQuote);
+
+});
+
+</script>
+
+</body>
+</html>
