@@ -103,10 +103,10 @@ function displayQuote(){
 
 document.addEventListener("DOMContentLoaded", function(){
 
-    fetch("quotes.txt")
+    fetch("testingquotes.txt")
     .then(response=>{
         if(!response.ok){
-            throw new Error("Could not load quotes.txt");
+            throw new Error("Could not load testingquotes.txt");
         }
         return response.text();
     })
