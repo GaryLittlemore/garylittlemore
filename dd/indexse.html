@@ -1,0 +1,118 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dirty Desires! Sip, Strip & Surrender</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+        }
+
+        #controls {
+            margin-bottom: 20px;
+        }
+
+        select {
+            padding: 8px 12px;
+            font-size: 1rem;
+            border-radius: 5px;
+        }
+
+        #quote-box {
+            max-width: 700px;
+            padding: 30px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        #quote {
+            font-size: 2rem;
+        }
+    </style>
+</head>
+<body>
+
+<div id="controls">
+    <label for="levelSelect">Select Level: </label>
+    <select id="levelSelect">
+        <option value="select">Select a card</option>
+        <option value="white">White Cards</option>
+        <option value="red">Red Cards</option>
+        <option value="black">Black Cards</option>
+        <!--<option value="toys">Toys Expansion Cards</option>-->
+    </select>
+</div>
+   
+<div id="quote-box">
+    <div id="quote">Loading quote...</div>
+</div>
+
+<script>
+let quotesByLevel = {};
+
+function getRandomQuote(level) {
+    const quotes = quotesByLevel[level];
+    if (!quotes || quotes.length === 0) {
+        return "No quotes found for this level.";
+    }
+    return quotes[Math.floor(Math.random() * quotes.length)];
+}
+
+function displayQuote() {
+    const selectedLevel = document.getElementById("levelSelect").value;
+    const quote = getRandomQuote(selectedLevel);
+    document.getElementById("quote").textContent = quote;
+}
+
+document.addEventListener("DOMContentLoaded", function() {
+
+    fetch("quotesse.txt")
+        .then(response => {
+            if (!response.ok) {
+                throw new Error("Could not load quotesse.txt");
+            }
+            return response.text();
+        })
+        .then(text => {
+            const lines = text.split("\n");
+            let currentLevel = null;
+
+            lines.forEach(line => {
+                line = line.trim();
+                const levelMatch = line.match(/^\[(.+)\]$/);
+
+                if (levelMatch) {
+                    currentLevel = levelMatch[1].toLowerCase();
+                    quotesByLevel[currentLevel] = [];
+                }
+                else if (line && currentLevel) {
+                    quotesByLevel[currentLevel].push(line);
+                }
+            });
+
+            displayQuote(); // Show first quote on load
+        })
+        .catch(error => {
+            document.getElementById("quote").textContent = "Failed to load quote.";
+            console.error(error);
+        });
+
+    document.getElementById("levelSelect").addEventListener("change", displayQuote);
+});
+</script>
+
+</br>
+<div class="refreshButton" onclick="location.reload()">Reset</div>
+
+</body>
+</html>
